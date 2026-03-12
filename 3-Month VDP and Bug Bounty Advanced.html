@@ -1,0 +1,1278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cyber Wolf – 3-Month VDP &amp; Bug Bounty Advanced Course</title>
+  <style>
+    /* =====================  BASE  ===================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Times New Roman', Times, serif;
+      background-color: #ffffff;
+      color: #000000;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .page-wrapper {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0;
+    }
+
+    /* =====================  HEADER  ===================== */
+    .header {
+      background: linear-gradient(135deg, #0d2247 0%, #1a4ab5 60%, #2563eb 100%);
+      color: #ffffff;
+      padding: 36px 40px;
+      border-radius: 10px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .header-left { flex: 1; }
+
+    .brand-name {
+      font-size: 38px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #ffffff;
+    }
+
+    .brand-tagline {
+      font-size: 13px;
+      color: #a8c4ff;
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+
+    .course-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-top: 18px;
+      color: #e0ecff;
+      border-left: 4px solid #60a5fa;
+      padding-left: 12px;
+    }
+
+    .course-subtitle {
+      font-size: 14px;
+      color: #93b8f5;
+      margin-top: 6px;
+      padding-left: 16px;
+    }
+
+    .header-right {
+      text-align: right;
+      font-size: 13px;
+      color: #a8c4ff;
+      line-height: 1.8;
+    }
+
+    .header-right a { color: #93c5fd; text-decoration: none; }
+
+    .wolf-icon {
+      font-size: 70px;
+      opacity: 0.25;
+      position: absolute;
+      right: 50px;
+      top: 20px;
+      pointer-events: none;
+    }
+
+    /* =====================  INFO CARDS  ===================== */
+    .info-strip {
+      display: flex;
+      gap: 16px;
+      margin-bottom: 28px;
+      flex-wrap: wrap;
+    }
+
+    .info-card {
+      flex: 1;
+      min-width: 200px;
+      border: 2px solid #1a4ab5;
+      border-radius: 8px;
+      padding: 14px 18px;
+      background: #f0f5ff;
+    }
+
+    .info-card h4 {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #1a4ab5;
+      margin-bottom: 6px;
+    }
+
+    .info-card p {
+      font-size: 13px;
+      color: #000;
+      font-weight: 600;
+    }
+
+    /* =====================  SECTION TITLES  ===================== */
+    .section-heading {
+      font-size: 18px;
+      font-weight: 700;
+      color: #ffffff;
+      background: #0d2247;
+      padding: 10px 18px;
+      border-radius: 6px;
+      margin: 32px 0 14px 0;
+      letter-spacing: 0.5px;
+    }
+
+    .month-heading {
+      font-size: 16px;
+      font-weight: 700;
+      color: #ffffff;
+      background: #1a4ab5;
+      padding: 9px 18px;
+      border-radius: 6px;
+      margin: 22px 0 12px 0;
+    }
+
+    /* =====================  TABLES  ===================== */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 20px;
+      font-size: 13px;
+    }
+
+    thead tr th {
+      background-color: #1a4ab5;
+      color: #ffffff;
+      padding: 11px 13px;
+      text-align: left;
+      border: 1px solid #0d2247;
+      font-size: 13px;
+      font-family: 'Times New Roman', Times, serif;
+    }
+
+    tbody tr td {
+      padding: 9px 13px;
+      border: 1px solid #b3c6ef;
+      color: #000000;
+      vertical-align: top;
+    }
+
+    tbody tr:nth-child(odd)  { background-color: #ffffff; }
+    tbody tr:nth-child(even) { background-color: #dce8fc; }
+
+    tbody tr:hover { background-color: #bdd4f8; }
+
+    .lab-ova   { color: #065f46; font-weight: 700; }
+    .lab-wolf  { color: #7c3aed; font-weight: 700; }
+    .lab-both  { color: #b45309; font-weight: 700; }
+
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+      white-space: nowrap;
+    }
+
+    .tag-ova  { background: #d1fae5; color: #065f46; border: 1px solid #6ee7b7; }
+    .tag-wolf { background: #ede9fe; color: #5b21b6; border: 1px solid #c4b5fd; }
+    .tag-both { background: #fff3cd; color: #92400e; border: 1px solid #fcd34d; }
+    .tag-theory { background: #f1f5f9; color: #334155; border: 1px solid #cbd5e1; }
+
+    .week-label {
+      font-weight: 700;
+      color: #1a4ab5;
+      white-space: nowrap;
+    }
+
+    /* =====================  LAB SECTION  ===================== */
+    .lab-section {
+      border: 2px solid #1a4ab5;
+      border-radius: 10px;
+      padding: 22px 26px;
+      margin: 24px 0;
+      background: #f7f9ff;
+    }
+
+    .lab-section h3 {
+      font-size: 16px;
+      color: #0d2247;
+      margin-bottom: 14px;
+      border-bottom: 2px solid #1a4ab5;
+      padding-bottom: 8px;
+    }
+
+    .lab-grid {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .lab-box {
+      flex: 1;
+      min-width: 240px;
+      border-radius: 8px;
+      padding: 16px 18px;
+    }
+
+    .lab-box.ova-box  { background: #d1fae5; border: 1.5px solid #6ee7b7; }
+    .lab-box.wolf-box { background: #ede9fe; border: 1.5px solid #c4b5fd; }
+
+    .lab-box h4 {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+
+    .lab-box.ova-box  h4 { color: #065f46; }
+    .lab-box.wolf-box h4 { color: #5b21b6; }
+
+    .lab-box ul { padding-left: 18px; }
+    .lab-box ul li { font-size: 12.5px; margin-bottom: 5px; color: #000; }
+
+    /* =====================  LEGEND  ===================== */
+    .legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+      font-size: 12px;
+    }
+
+    .legend-item { display: flex; align-items: center; gap: 6px; }
+
+    /* =====================  TOOLS TABLE  ===================== */
+    .tools-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .tool-chip {
+      background: #dce8fc;
+      border: 1px solid #1a4ab5;
+      border-radius: 6px;
+      padding: 7px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #0d2247;
+      text-align: center;
+    }
+
+    /* =====================  FOOTER  ===================== */
+    .footer {
+      background: #0d2247;
+      color: #a8c4ff;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 36px;
+      font-size: 12.5px;
+    }
+
+    .footer a { color: #60a5fa; text-decoration: none; }
+
+    .footer .divider {
+      border: none;
+      border-top: 1px solid #1a4ab5;
+      margin: 10px 0;
+    }
+    .top-nav { margin-bottom: 10px; }
+    .back-btn {
+      display: inline-block;
+      text-decoration: none;
+      background: #1a4ab5;
+      color: #ffffff;
+      border: 1px solid #0d2247;
+      border-radius: 6px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .back-btn:hover { background: #0d2247; }
+
+    @media (max-width: 900px) {
+      .page-wrapper { padding: 0; }
+      .header { flex-direction: column; align-items: flex-start; padding: 24px 20px; }
+      .header-right { text-align: left; }
+      .brand-name { font-size: 30px; }
+      .course-title { font-size: 19px; }
+      .course-subtitle { padding-left: 12px; }
+      table { display: block; overflow-x: auto; white-space: nowrap; }
+    }
+
+    @media (max-width: 600px) {
+      .section-heading { font-size: 16px; padding: 8px 12px; }
+      .month-heading { font-size: 14px; padding: 8px 12px; }
+      .info-strip { gap: 10px; }
+      .info-card { min-width: 100%; }
+      .tools-grid { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 320px) {
+      .page-wrapper { padding: 0; }
+      .header { padding: 14px 12px; border-radius: 6px; }
+      .brand-name { font-size: 21px; letter-spacing: 1px; }
+      .brand-tagline, .header-right { font-size: 12px; line-height: 1.55; }
+      .course-title { font-size: 15px; margin-top: 10px; padding-left: 8px; }
+      .course-subtitle { font-size: 12px; padding-left: 8px; }
+      .section-heading, .month-heading { font-size: 13px; padding: 6px 8px; }
+      table { font-size: 12px; }
+      thead tr th, tbody tr td { padding: 6px; }
+      .back-btn { width: 100%; text-align: center; padding: 8px 10px; }
+      .tag { font-size: 10px; padding: 1px 6px; }
+      .info-card { padding: 9px 10px; }
+      .lab-section { padding: 12px 10px; }
+      .lab-box { min-width: 100%; padding: 10px 10px; }
+      .tool-chip { font-size: 11px; padding: 6px 8px; }
+      .footer { font-size: 11px; padding: 10px; }
+    }
+
+    /* =====================  PRINT / PDF  ===================== */
+    @media print {
+      body {
+        font-size: 11px;
+        background: #fff;
+        color: #000;
+      }
+
+      .page-wrapper { padding: 0; }
+
+      .header {
+        background: #1a4ab5 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+        border-radius: 0;
+        padding: 20px 24px;
+      }
+
+      thead tr th {
+        background-color: #1a4ab5 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      tbody tr:nth-child(even) {
+        background-color: #dce8fc !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .section-heading {
+        background: #0d2247 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .month-heading {
+        background: #1a4ab5 !important;
+        color: #fff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .footer {
+        background: #0d2247 !important;
+        color: #a8c4ff !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      table { page-break-inside: auto; }
+      tr    { page-break-inside: avoid; }
+
+      .lab-box.ova-box {
+        background: #d1fae5 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+
+      .lab-box.wolf-box {
+        background: #ede9fe !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page-wrapper">
+  <div class="top-nav">
+    <a class="back-btn" href="index.html">Back</a>
+  </div>
+
+  <!-- ===== HEADER ===== -->
+  <div class="header" style="position:relative; overflow:hidden;">
+    <div class="header-left">
+      <div class="brand-name">Cyber Wolf</div>
+      <div class="brand-tagline">Elite Cybersecurity Training &nbsp;|&nbsp; www.cyberwolf.pro</div>
+      <div class="course-title">3-Month VDP &amp; Bug Bounty Advanced Course</div>
+      <div class="course-subtitle">Vulnerability Disclosure Program &nbsp;|&nbsp; Advanced Bug Bounty Hunting &nbsp;|&nbsp; Ethical Hacking</div>
+    </div>
+    <div class="header-right">
+      <div><strong>Provider:</strong> Cyber Wolf</div>
+      <div><a href="https://www.cyberwolf.pro">www.cyberwolf.pro</a></div>
+      <div><a href="mailto:cyberwolfofficials@gmail.com">cyberwolfofficials@gmail.com</a></div>
+      <div style="margin-top:8px;"><strong>Duration:</strong> 12 Weeks</div>
+      <div><strong>Level:</strong> Advanced</div>
+      <div><strong>Format:</strong> Theory + Hands-on Labs</div>
+    </div>
+  </div>
+
+  <!-- ===== INFO STRIP ===== -->
+  <div class="info-strip">
+    <div class="info-card">
+      <h4>Total Duration</h4>
+      <p>12 Weeks &nbsp;|&nbsp; 3 Months</p>
+    </div>
+    <div class="info-card">
+      <h4>Total Modules</h4>
+      <p>12 Modules &nbsp;|&nbsp; 48 Topics</p>
+    </div>
+    <div class="info-card">
+      <h4>Lab Environments</h4>
+      <p>Local OVA &amp; Wolf Hosting Labs</p>
+    </div>
+    <div class="info-card">
+      <h4>Certification</h4>
+      <p>Cyber Wolf VDP &amp; Bug Bounty Pro</p>
+    </div>
+    <div class="info-card">
+      <h4>Target Audience</h4>
+      <p>Security Researchers, Pentesters</p>
+    </div>
+  </div>
+
+  <!-- ===== LEGEND ===== -->
+  <div class="legend">
+    <strong style="font-size:12.5px;">Lab Type Legend:</strong>
+    <span class="legend-item"><span class="tag tag-ova">OVA Lab</span> – Downloadable Virtual Machine (Local)</span>
+    <span class="legend-item"><span class="tag tag-wolf">Wolf Lab</span> – Cyber Wolf Hosted Online Lab</span>
+    <span class="legend-item"><span class="tag tag-both">OVA + Wolf</span> – Both Available</span>
+    <span class="legend-item"><span class="tag tag-theory">Theory</span> – Lecture / No Lab</span>
+  </div>
+
+  <!-- ===================================================
+       MONTH 1
+  =================================================== -->
+  <div class="section-heading">Month 1 — Web Security Foundations &amp; Reconnaissance</div>
+
+  <!-- WEEK 1 -->
+  <div class="month-heading">Week 1 — Web Application Security Fundamentals</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">1.1</span></td>
+        <td>Course Introduction &amp; Setup</td>
+        <td>Course overview, VDP vs Bug Bounty fundamentals, setting up Kali Linux, Burp Suite, and lab environment.</td>
+        <td>2 hrs</td>
+        <td><span class="tag tag-ova">OVA Lab</span></td>
+        <td>CW-Lab-01</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">1.2</span></td>
+        <td>HTTP/HTTPS Protocol Deep Dive</td>
+        <td>Understanding requests, responses, headers, cookies, sessions, REST APIs, HTTP methods (GET, POST, PUT, DELETE, PATCH).</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-02</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">1.3</span></td>
+        <td>Burp Suite Mastery</td>
+        <td>Proxy setup, Repeater, Intruder, Scanner, Decoder, Sequencer, Extensions (Autorize, Logger++, Hackvertor).</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-03</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">1.4</span></td>
+        <td>Browser DevTools for Security</td>
+        <td>Network tab, Storage inspector, JavaScript console, Source tab analysis for bug hunting.</td>
+        <td>2 hrs</td>
+        <td><span class="tag tag-theory">Theory</span></td>
+        <td>—</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WEEK 2 -->
+  <div class="month-heading">Week 2 — Reconnaissance &amp; Information Gathering</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">2.1</span></td>
+        <td>Passive Reconnaissance</td>
+        <td>OSINT techniques, WHOIS, Google Dorks, Shodan, Censys, VirusTotal, Wayback Machine, Certificate Transparency.</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-04</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">2.2</span></td>
+        <td>Subdomain Enumeration</td>
+        <td>Subfinder, Amass, Assetfinder, DNSx, MassDNS, permutation tools, passive vs active enumeration strategies.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-05</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">2.3</span></td>
+        <td>Active Reconnaissance</td>
+        <td>Nmap scanning, port discovery, service enumeration, fingerprinting, WAF detection (wafw00f), tech detection (Wappalyzer, Whatweb).</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-ova">OVA Lab</span></td>
+        <td>CW-Lab-06</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">2.4</span></td>
+        <td>Content Discovery &amp; Fuzzing</td>
+        <td>Gobuster, ffuf, feroxbuster, directory/file brute-forcing, parameter discovery, custom wordlists (SecLists).</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-07</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WEEK 3 -->
+  <div class="month-heading">Week 3 — OWASP Top 10 (Part 1): Injection &amp; Access Control</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">3.1</span></td>
+        <td>SQL Injection Fundamentals</td>
+        <td>Error-based, Union-based, Blind Boolean, Time-based Blind SQLi. Manual exploitation and SQLMap automation.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-08</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">3.2</span></td>
+        <td>NoSQL Injection</td>
+        <td>MongoDB injection, operator injection ($gt, $ne, $where), authentication bypass, data exfiltration from NoSQL databases.</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-09</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">3.3</span></td>
+        <td>Broken Access Control</td>
+        <td>IDOR (Insecure Direct Object References), horizontal &amp; vertical privilege escalation, forced browsing, BOLA/BFLA for APIs.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-10</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">3.4</span></td>
+        <td>Command Injection &amp; RCE</td>
+        <td>OS command injection, blind command injection, RCE via various injection points, chaining vulnerabilities for maximum impact.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-ova">OVA Lab</span></td>
+        <td>CW-Lab-11</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WEEK 4 -->
+  <div class="month-heading">Week 4 — OWASP Top 10 (Part 2): XSS, CSRF &amp; Misconfigurations</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">4.1</span></td>
+        <td>Cross-Site Scripting (XSS)</td>
+        <td>Reflected, Stored, DOM-based XSS. Filter bypass techniques, polyglots, context-based payloads, cookie stealing, keylogging.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-12</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">4.2</span></td>
+        <td>CSRF &amp; Clickjacking</td>
+        <td>Cross-Site Request Forgery attacks, token bypass, SameSite cookie abuse, Clickjacking via iframes, X-Frame-Options bypass.</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-13</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">4.3</span></td>
+        <td>Security Misconfigurations</td>
+        <td>Exposed admin panels, default credentials, verbose errors, directory listing, cloud storage misconfigurations (S3, GCS, Azure Blob).</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-14</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">4.4</span></td>
+        <td>Month 1 — Capture the Flag Challenge</td>
+        <td>Hands-on CTF challenge integrating all Month 1 topics. Students hunt for multiple vulnerabilities in a simulated real-world application.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-CTF-M1</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ===================================================
+       MONTH 2
+  =================================================== -->
+  <div class="section-heading">Month 2 — Advanced Exploitation &amp; API Security</div>
+
+  <!-- WEEK 5 -->
+  <div class="month-heading">Week 5 — Advanced Web Vulnerabilities</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">5.1</span></td>
+        <td>Server-Side Request Forgery (SSRF)</td>
+        <td>SSRF basics, blind SSRF, cloud metadata exploitation (AWS IMDSv1/v2, GCP, Azure), SSRF to RCE, DNS rebinding, filter bypass techniques.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-15</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">5.2</span></td>
+        <td>XML External Entity (XXE)</td>
+        <td>Classic XXE, blind XXE, XXE via file uploads, SVG/DOCX injection, XXE to SSRF pivoting, OOB data exfiltration.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-16</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">5.3</span></td>
+        <td>File Upload Vulnerabilities</td>
+        <td>Unrestricted file upload, MIME type bypass, extension bypass, polyglot files, ImageMagick exploits, path traversal via upload.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-ova">OVA Lab</span></td>
+        <td>CW-Lab-17</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">5.4</span></td>
+        <td>Path Traversal &amp; LFI/RFI</td>
+        <td>Directory traversal, Local/Remote File Inclusion, log poisoning, PHP wrappers, LFI to RCE chaining techniques.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-18</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WEEK 6 -->
+  <div class="month-heading">Week 6 — Authentication &amp; Session Management Attacks</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">6.1</span></td>
+        <td>JWT Attacks</td>
+        <td>JWT structure, none algorithm attack, weak secret brute-force, algorithm confusion (RS256→HS256), kid injection, JWK injection, JWT cracking with hashcat.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-19</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">6.2</span></td>
+        <td>OAuth 2.0 Vulnerabilities</td>
+        <td>OAuth flow analysis, open redirect abuse, state parameter bypass, CSRF in OAuth, token leakage, account takeover via OAuth misconfig.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-20</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">6.3</span></td>
+        <td>Session Hijacking &amp; Fixation</td>
+        <td>Session prediction, session fixation attacks, cookie theft via XSS, HttpOnly/Secure flags analysis, SameSite bypass.</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-ova">OVA Lab</span></td>
+        <td>CW-Lab-21</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">6.4</span></td>
+        <td>Password Reset Flaws</td>
+        <td>Insecure reset token generation, host header injection in reset emails, token reuse, race conditions in reset flows, account takeover chains.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-22</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WEEK 7 -->
+  <div class="month-heading">Week 7 — API Security Testing</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">7.1</span></td>
+        <td>REST API Security</td>
+        <td>API enumeration, endpoint discovery, Postman/Insomnia usage, OWASP API Top 10, mass assignment, improper asset management.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-23</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">7.2</span></td>
+        <td>GraphQL Security Testing</td>
+        <td>GraphQL introspection, query depth attacks, batching attacks, IDOR in GraphQL, field suggestions abuse, authorization bypass.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-24</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">7.3</span></td>
+        <td>BOLA &amp; Broken Function Level Auth</td>
+        <td>Broken Object Level Authorization (BOLA/IDOR in APIs), function-level privilege escalation, mass assignment vulnerabilities in JSON APIs.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-25</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">7.4</span></td>
+        <td>Mobile API Interception</td>
+        <td>Android/iOS app traffic interception, SSL pinning bypass (Frida, objection), API key extraction from APK, Jadx usage.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-ova">OVA Lab</span></td>
+        <td>CW-Lab-26</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WEEK 8 -->
+  <div class="month-heading">Week 8 — Business Logic &amp; Race Condition Attacks</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">8.1</span></td>
+        <td>Business Logic Vulnerabilities</td>
+        <td>Price manipulation, quantity tampering, workflow bypass, coupon abuse, negative values, multi-step process exploitation.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-27</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">8.2</span></td>
+        <td>Race Conditions &amp; TOCTOU</td>
+        <td>Time-of-check to time-of-use, concurrent request exploitation using Turbo Intruder, Burp Suite, race condition in payments/credits.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-28</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">8.3</span></td>
+        <td>HTTP Request Smuggling</td>
+        <td>CL.TE and TE.CL smuggling, detecting via timing, exploiting to bypass security controls, cache poisoning via smuggling.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-29</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">8.4</span></td>
+        <td>Month 2 — CTF Challenge</td>
+        <td>Advanced CTF covering API security, JWT attacks, business logic, and SSRF. Simulate real-world private program scope.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-CTF-M2</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ===================================================
+       MONTH 3
+  =================================================== -->
+  <div class="section-heading">Month 3 — VDP Programs, Bug Bounty Mastery &amp; Reporting</div>
+
+  <!-- WEEK 9 -->
+  <div class="month-heading">Week 9 — Advanced Exploitation Techniques</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">9.1</span></td>
+        <td>Subdomain Takeover</td>
+        <td>Identifying dangling DNS records, takeover via GitHub Pages, Heroku, Shopify, S3 buckets, fingerprinting vulnerable services.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-30</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">9.2</span></td>
+        <td>Cache Poisoning &amp; Deception</td>
+        <td>Web cache poisoning via unkeyed headers, cache deception attacks, CDN exploitation, Vary header abuse.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-31</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">9.3</span></td>
+        <td>SSTI (Server-Side Template Injection)</td>
+        <td>Identifying template engines (Jinja2, Twig, FreeMarker), SSTI to RCE payloads, sandbox escapes, filter bypass techniques.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-ova">OVA Lab</span></td>
+        <td>CW-Lab-32</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">9.4</span></td>
+        <td>CORS Misconfiguration</td>
+        <td>Origin reflection, null origin bypass, trust of subdomains, exploiting CORS for data exfiltration, CORS with credentials.</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-33</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WEEK 10 -->
+  <div class="month-heading">Week 10 — Cloud Security &amp; Infrastructure Bugs</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">10.1</span></td>
+        <td>AWS Security Testing</td>
+        <td>IAM misconfigurations, S3 bucket enumeration, metadata service exploitation (IMDSv1), AWS CLI abuse, Lambda security testing.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-34</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">10.2</span></td>
+        <td>GCP &amp; Azure Security</td>
+        <td>Google Cloud metadata exploitation, Azure SAS token abuse, GCS bucket misconfiguration, service account key exposure.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-35</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">10.3</span></td>
+        <td>Docker &amp; Kubernetes Security</td>
+        <td>Container escape techniques, privileged container abuse, exposed Docker API, K8s RBAC misconfiguration, secrets in environment variables.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-ova">OVA Lab</span></td>
+        <td>CW-Lab-36</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">10.4</span></td>
+        <td>Exposed Services &amp; Sensitive Data</td>
+        <td>Exposed .git directories, .env files, API keys in JS, GitHub dorking, hardcoded credentials, sensitive data in Wayback Machine.</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-37</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WEEK 11 -->
+  <div class="month-heading">Week 11 — VDP Programs &amp; Bug Bounty Platforms</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">11.1</span></td>
+        <td>Understanding VDP Programs</td>
+        <td>VDP vs Bug Bounty differences, responsible disclosure ethics, safe harbor clauses, CVE process, coordinated disclosure timelines.</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-theory">Theory</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">11.2</span></td>
+        <td>HackerOne &amp; Bugcrowd Platforms</td>
+        <td>Platform navigation, selecting programs, reading scope carefully, program policies, triage process, reputation building, Hall of Fame.</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-wolf">Wolf Lab</span></td>
+        <td>CW-Lab-38</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">11.3</span></td>
+        <td>Intigriti, Synack &amp; Private Programs</td>
+        <td>EU platform usage, invitation-only programs, managed platforms, getting into private programs, building reputation on public programs.</td>
+        <td>3 hrs</td>
+        <td><span class="tag tag-theory">Theory</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">11.4</span></td>
+        <td>Bug Bounty Methodology &amp; Automation</td>
+        <td>Building recon automation pipelines (Nuclei, httpx, gau, waybackurls), mass scanning responsibly, alerting systems, continuous monitoring.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-39</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- WEEK 12 -->
+  <div class="month-heading">Week 12 — Report Writing, Impact Analysis &amp; Final Assessment</div>
+  <table>
+    <thead>
+      <tr>
+        <th style="width:6%;">#</th>
+        <th style="width:22%;">Topic</th>
+        <th style="width:36%;">Description</th>
+        <th style="width:10%;">Duration</th>
+        <th style="width:14%;">Lab Type</th>
+        <th style="width:12%;">Lab Name</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="week-label">12.1</span></td>
+        <td>Vulnerability Report Writing</td>
+        <td>Writing high-quality bug reports, CVSS scoring (v3.1), impact analysis, PoC (Proof of Concept) crafting, reproducible steps, screenshots &amp; videos.</td>
+        <td>4 hrs</td>
+        <td><span class="tag tag-theory">Theory</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">12.2</span></td>
+        <td>Chaining Vulnerabilities for High Impact</td>
+        <td>Combining low/medium bugs into critical chains: XSS + CSRF + IDOR, SSRF + CORS + auth bypass, escalating severity through chaining.</td>
+        <td>5 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-Lab-40</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">12.3</span></td>
+        <td>Legal &amp; Ethical Boundaries</td>
+        <td>Staying within scope, legal protections for researchers, Computer Fraud and Abuse Act (CFAA), GDPR implications, handling sensitive data found.</td>
+        <td>2 hrs</td>
+        <td><span class="tag tag-theory">Theory</span></td>
+        <td>—</td>
+      </tr>
+      <tr>
+        <td><span class="week-label">12.4</span></td>
+        <td>Final Capstone CTF &amp; Assessment</td>
+        <td>Full-scope simulated Bug Bounty program with 10+ hidden vulnerabilities. Report submission, triage simulation, and Cyber Wolf certification exam.</td>
+        <td>6 hrs</td>
+        <td><span class="tag tag-both">OVA + Wolf</span></td>
+        <td>CW-CTF-FINAL</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <!-- ===================================================
+       LAB ENVIRONMENTS
+  =================================================== -->
+  <div class="section-heading">Lab Environments</div>
+
+  <div class="lab-section">
+    <h3>Available Lab Environments</h3>
+    <div class="lab-grid">
+
+      <div class="lab-box ova-box">
+        <h4>Local OVA Labs (Downloadable)</h4>
+        <ul>
+          <li><strong>Format:</strong> .OVA Virtual Machine (VirtualBox / VMware)</li>
+          <li><strong>OS:</strong> Kali Linux Attacker VM + Vulnerable Target VMs</li>
+          <li><strong>Offline Access:</strong> Fully functional without internet</li>
+          <li><strong>Included Apps:</strong> DVWA, WebGoat, Juice Shop, VulnHub machines, custom Cyber Wolf targets</li>
+          <li><strong>RAM Required:</strong> Minimum 8 GB (16 GB recommended)</li>
+          <li><strong>Storage:</strong> ~15 GB per lab set</li>
+          <li><strong>Distribution:</strong> Downloadable via course portal</li>
+          <li><strong>Support:</strong> Setup guide + video walkthrough included</li>
+        </ul>
+      </div>
+
+      <div class="lab-box wolf-box">
+        <h4>Wolf Hosting Labs (Cloud-Based)</h4>
+        <ul>
+          <li><strong>Format:</strong> Browser-accessible cloud lab environment</li>
+          <li><strong>Access:</strong> No installation required — runs in browser</li>
+          <li><strong>Infrastructure:</strong> Hosted on Cyber Wolf secure servers</li>
+          <li><strong>Availability:</strong> 24/7 access during course duration</li>
+          <li><strong>Features:</strong> Pre-configured attack + target environments</li>
+          <li><strong>Tools Included:</strong> Burp Suite, Nmap, ffuf, Nuclei, SQLMap, Metasploit</li>
+          <li><strong>Reset Anytime:</strong> One-click lab reset functionality</li>
+          <li><strong>Support:</strong> Live lab assistant + Discord community</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Lab Schedule Table -->
+  <div class="month-heading">Lab Summary by Module</div>
+  <table>
+    <thead>
+      <tr>
+        <th>Month</th>
+        <th>Week</th>
+        <th>Lab ID</th>
+        <th>Lab Name</th>
+        <th>Type</th>
+        <th>Vulnerability Focus</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Month 1</td><td>Week 1</td><td>CW-Lab-01</td><td>Environment Setup Lab</td><td><span class="tag tag-ova">OVA Lab</span></td><td>Kali Linux, Burp Suite, VM setup</td></tr>
+      <tr><td>Month 1</td><td>Week 1</td><td>CW-Lab-02</td><td>HTTP Protocol Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>HTTP methods, headers, cookies</td></tr>
+      <tr><td>Month 1</td><td>Week 1</td><td>CW-Lab-03</td><td>Burp Suite Mastery Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>Proxy, Intruder, Repeater</td></tr>
+      <tr><td>Month 1</td><td>Week 2</td><td>CW-Lab-04</td><td>OSINT &amp; Passive Recon Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>Google Dorks, Shodan, WHOIS</td></tr>
+      <tr><td>Month 1</td><td>Week 2</td><td>CW-Lab-05</td><td>Subdomain Enum Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>Subfinder, Amass, DNSx</td></tr>
+      <tr><td>Month 1</td><td>Week 2</td><td>CW-Lab-06</td><td>Active Recon Lab</td><td><span class="tag tag-ova">OVA Lab</span></td><td>Nmap, Whatweb, wafw00f</td></tr>
+      <tr><td>Month 1</td><td>Week 2</td><td>CW-Lab-07</td><td>Content Discovery Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>ffuf, Gobuster, SecLists</td></tr>
+      <tr><td>Month 1</td><td>Week 3</td><td>CW-Lab-08</td><td>SQL Injection Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>Error, Union, Blind, Time-based SQLi</td></tr>
+      <tr><td>Month 1</td><td>Week 3</td><td>CW-Lab-09</td><td>NoSQL Injection Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>MongoDB, operator injection</td></tr>
+      <tr><td>Month 1</td><td>Week 3</td><td>CW-Lab-10</td><td>IDOR &amp; Access Control Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>Broken Access Control, IDOR</td></tr>
+      <tr><td>Month 1</td><td>Week 3</td><td>CW-Lab-11</td><td>Command Injection Lab</td><td><span class="tag tag-ova">OVA Lab</span></td><td>OS Command Injection, RCE</td></tr>
+      <tr><td>Month 1</td><td>Week 4</td><td>CW-Lab-12</td><td>XSS Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>Reflected, Stored, DOM XSS</td></tr>
+      <tr><td>Month 1</td><td>Week 4</td><td>CW-Lab-13</td><td>CSRF &amp; Clickjacking Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>CSRF bypass, iframe attacks</td></tr>
+      <tr><td>Month 1</td><td>Week 4</td><td>CW-Lab-14</td><td>Misconfiguration Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>Admin panels, S3 buckets</td></tr>
+      <tr><td>Month 1</td><td>Week 4</td><td>CW-CTF-M1</td><td>Month 1 CTF Challenge</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>All Month 1 Topics</td></tr>
+      <tr><td>Month 2</td><td>Week 5</td><td>CW-Lab-15</td><td>SSRF Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>SSRF, Cloud Metadata, Blind SSRF</td></tr>
+      <tr><td>Month 2</td><td>Week 5</td><td>CW-Lab-16</td><td>XXE Injection Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>XXE, OOB, SVG injection</td></tr>
+      <tr><td>Month 2</td><td>Week 5</td><td>CW-Lab-17</td><td>File Upload Lab</td><td><span class="tag tag-ova">OVA Lab</span></td><td>Unrestricted upload, polyglot</td></tr>
+      <tr><td>Month 2</td><td>Week 5</td><td>CW-Lab-18</td><td>LFI/RFI &amp; Path Traversal Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>LFI to RCE, PHP wrappers</td></tr>
+      <tr><td>Month 2</td><td>Week 6</td><td>CW-Lab-19</td><td>JWT Attacks Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>None alg, alg confusion, weak secret</td></tr>
+      <tr><td>Month 2</td><td>Week 6</td><td>CW-Lab-20</td><td>OAuth 2.0 Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>OAuth misconfig, ATO</td></tr>
+      <tr><td>Month 2</td><td>Week 6</td><td>CW-Lab-21</td><td>Session Hijacking Lab</td><td><span class="tag tag-ova">OVA Lab</span></td><td>Session fixation, cookie theft</td></tr>
+      <tr><td>Month 2</td><td>Week 6</td><td>CW-Lab-22</td><td>Password Reset Flaws Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>Host header injection, token reuse</td></tr>
+      <tr><td>Month 2</td><td>Week 7</td><td>CW-Lab-23</td><td>REST API Security Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>OWASP API Top 10</td></tr>
+      <tr><td>Month 2</td><td>Week 7</td><td>CW-Lab-24</td><td>GraphQL Security Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>Introspection, query attacks</td></tr>
+      <tr><td>Month 2</td><td>Week 7</td><td>CW-Lab-25</td><td>BOLA &amp; API Auth Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>BOLA, function-level auth</td></tr>
+      <tr><td>Month 2</td><td>Week 7</td><td>CW-Lab-26</td><td>Mobile API Lab</td><td><span class="tag tag-ova">OVA Lab</span></td><td>SSL pinning bypass, APK analysis</td></tr>
+      <tr><td>Month 2</td><td>Week 8</td><td>CW-Lab-27</td><td>Business Logic Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>Price manipulation, workflow bypass</td></tr>
+      <tr><td>Month 2</td><td>Week 8</td><td>CW-Lab-28</td><td>Race Conditions Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>Turbo Intruder, TOCTOU</td></tr>
+      <tr><td>Month 2</td><td>Week 8</td><td>CW-Lab-29</td><td>HTTP Smuggling Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>CL.TE, TE.CL smuggling</td></tr>
+      <tr><td>Month 2</td><td>Week 8</td><td>CW-CTF-M2</td><td>Month 2 CTF Challenge</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>All Month 2 Topics</td></tr>
+      <tr><td>Month 3</td><td>Week 9</td><td>CW-Lab-30</td><td>Subdomain Takeover Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>DNS takeover, dangling records</td></tr>
+      <tr><td>Month 3</td><td>Week 9</td><td>CW-Lab-31</td><td>Cache Poisoning Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>Unkeyed headers, CDN abuse</td></tr>
+      <tr><td>Month 3</td><td>Week 9</td><td>CW-Lab-32</td><td>SSTI Lab</td><td><span class="tag tag-ova">OVA Lab</span></td><td>Jinja2, Twig SSTI to RCE</td></tr>
+      <tr><td>Month 3</td><td>Week 9</td><td>CW-Lab-33</td><td>CORS Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>Origin reflection, null bypass</td></tr>
+      <tr><td>Month 3</td><td>Week 10</td><td>CW-Lab-34</td><td>AWS Security Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>IAM, S3, Lambda security</td></tr>
+      <tr><td>Month 3</td><td>Week 10</td><td>CW-Lab-35</td><td>GCP &amp; Azure Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>Cloud metadata, SAS token abuse</td></tr>
+      <tr><td>Month 3</td><td>Week 10</td><td>CW-Lab-36</td><td>Docker &amp; K8s Lab</td><td><span class="tag tag-ova">OVA Lab</span></td><td>Container escape, RBAC misconfig</td></tr>
+      <tr><td>Month 3</td><td>Week 10</td><td>CW-Lab-37</td><td>Sensitive Data Exposure Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>.git, .env, API keys, GitHub dorking</td></tr>
+      <tr><td>Month 3</td><td>Week 11</td><td>CW-Lab-38</td><td>Bug Bounty Platforms Lab</td><td><span class="tag tag-wolf">Wolf Lab</span></td><td>HackerOne, Bugcrowd navigation</td></tr>
+      <tr><td>Month 3</td><td>Week 11</td><td>CW-Lab-39</td><td>Automation Pipeline Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>Nuclei, httpx, gau, mass scanning</td></tr>
+      <tr><td>Month 3</td><td>Week 12</td><td>CW-Lab-40</td><td>Vuln Chaining Lab</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>XSS + CSRF + IDOR chains</td></tr>
+      <tr><td>Month 3</td><td>Week 12</td><td>CW-CTF-FINAL</td><td>Final Capstone CTF</td><td><span class="tag tag-both">OVA + Wolf</span></td><td>All Topics — Certification Exam</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ===================================================
+       TOOLS & RESOURCES
+  =================================================== -->
+  <div class="section-heading">Tools &amp; Resources Covered</div>
+
+  <div class="tools-grid">
+    <div class="tool-chip">Burp Suite Pro</div>
+    <div class="tool-chip">Nmap / Masscan</div>
+    <div class="tool-chip">SQLMap</div>
+    <div class="tool-chip">ffuf / Gobuster</div>
+    <div class="tool-chip">Amass / Subfinder</div>
+    <div class="tool-chip">Nuclei</div>
+    <div class="tool-chip">httpx / dnsx</div>
+    <div class="tool-chip">gau / Waybackurls</div>
+    <div class="tool-chip">Metasploit</div>
+    <div class="tool-chip">Frida / Objection</div>
+    <div class="tool-chip">Jadx / APKTool</div>
+    <div class="tool-chip">Shodan / Censys</div>
+    <div class="tool-chip">Postman / Insomnia</div>
+    <div class="tool-chip">Turbo Intruder</div>
+    <div class="tool-chip">Hashcat / John</div>
+    <div class="tool-chip">Nikto / WPScan</div>
+    <div class="tool-chip">FFUF / Feroxbuster</div>
+    <div class="tool-chip">SecLists (Wordlists)</div>
+    <div class="tool-chip">Wappalyzer / Whatweb</div>
+    <div class="tool-chip">Docker / VirtualBox</div>
+    <div class="tool-chip">AWS CLI / GCloud CLI</div>
+    <div class="tool-chip">Python (Custom Scripts)</div>
+    <div class="tool-chip">Bash Automation</div>
+    <div class="tool-chip">OWASP ZAP</div>
+  </div>
+
+  <!-- ===================================================
+       CERTIFICATION
+  =================================================== -->
+  <div class="section-heading">Certification &amp; Assessment</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Assessment</th>
+        <th>Type</th>
+        <th>Weight</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Month 1 CTF</td>
+        <td>Practical</td>
+        <td>20%</td>
+        <td>Capture the Flag — Web security basics, OWASP Top 10 challenges</td>
+      </tr>
+      <tr>
+        <td>Month 2 CTF</td>
+        <td>Practical</td>
+        <td>25%</td>
+        <td>Advanced exploitation — API, JWT, business logic, smuggling</td>
+      </tr>
+      <tr>
+        <td>Bug Report Assignment</td>
+        <td>Written</td>
+        <td>20%</td>
+        <td>Write a professional vulnerability report with PoC for a given finding</td>
+      </tr>
+      <tr>
+        <td>Final Capstone CTF</td>
+        <td>Practical</td>
+        <td>25%</td>
+        <td>Full-scope simulated Bug Bounty program with 10+ hidden vulnerabilities</td>
+      </tr>
+      <tr>
+        <td>Theory Quiz</td>
+        <td>MCQ/Short Answer</td>
+        <td>10%</td>
+        <td>Online quiz covering VDP concepts, legal ethics, CVSS scoring, platform rules</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div style="background:#f0f5ff; border:2px solid #1a4ab5; border-radius:8px; padding:16px 20px; margin:16px 0;">
+    <strong style="color:#0d2247; font-size:14px;">Cyber Wolf Certification:</strong>
+    <span style="font-size:13px; color:#000;"> Upon passing (70%+ score), students receive the <strong>Cyber Wolf — Certified VDP &amp; Bug Bounty Professional (CW-CVBBP)</strong> digital certificate, verifiable on the Cyber Wolf portal at <a href="https://www.cyberwolf.pro" style="color:#1a4ab5;">www.cyberwolf.pro</a>.</span>
+  </div>
+
+  <!-- ===================================================
+       FOOTER
+  =================================================== -->
+  <div class="footer">
+    <div style="font-size:20px; letter-spacing:3px; font-weight:700; color:#ffffff; margin-bottom:6px;">CYBER WOLF</div>
+    <div style="color:#60a5fa; font-size:13px; margin-bottom:10px;">Elite Cybersecurity Training &amp; Research</div>
+    <hr class="divider" />
+    <div style="display:flex; justify-content:center; gap:40px; flex-wrap:wrap; font-size:12.5px; margin-bottom:8px;">
+      <span><a href="https://www.cyberwolf.pro">www.cyberwolf.pro</a></span>
+      <span><a href="mailto:cyberwolfofficials@gmail.com">cyberwolfofficials@gmail.com</a></span>
+      <span>Course Version: 2026 Edition</span>
+      <span>12 Weeks &nbsp;|&nbsp; 40+ Labs &nbsp;|&nbsp; 3 CTF Challenges</span>
+    </div>
+    <hr class="divider" />
+    <div style="font-size:11px; color:#6b8ec9;">
+      &copy; 2026 Cyber Wolf. All rights reserved. This syllabus is the intellectual property of Cyber Wolf.
+      Unauthorized reproduction or distribution is prohibited. All labs are designed for educational purposes only.
+      Perform security testing only on systems you have explicit written permission to test.
+    </div>
+  </div>
+
+</div>
+</body>
+</html>
