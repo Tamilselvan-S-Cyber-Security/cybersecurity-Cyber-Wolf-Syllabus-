@@ -73,19 +73,9 @@ Training content includes:
 - Weekly practical exercises
 - Challenge-based assessments and CTF style tasks
 
-## Usage
-
-Open any syllabus file in a web browser:
-
-- `index.html`
-- `3-Month VDP and Bug Bounty Advanced.html`
-- `ethical-hacking-40days.html`
-- `basic-cybersecurity-28days.html`
-
-Use your browser print options if you need printable course documents.
-
 ## Note
 
 All training content is for educational use only.  
 Security testing must be performed only on systems with explicit authorization.
+
 
