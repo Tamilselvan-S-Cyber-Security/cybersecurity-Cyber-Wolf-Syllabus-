@@ -8,10 +8,10 @@ Email: [cyberwolfofficials@gmail.com](mailto:cyberwolfofficials@gmail.com)
 
 ## Syllabus Files
 
-- `index.html` - Cyber Wolf master course index (all course types in one file)
-- `3-Month VDP and Bug Bounty Advanced.html` - 3-Month VDP and Bug Bounty Advanced Course (12 weeks)
-- `ethical-hacking-40days.html` - 40 Days Basic Ethical Hacking Course
-- `basic-cybersecurity-28days.html` - 28 Days Basic Cybersecurity Class
+-  Cyber Wolf master course index (all course types in one file)
+-  3-Month VDP and Bug Bounty Advanced Course (12 weeks)
+-  40 Days Basic Ethical Hacking Course
+-  28 Days Basic Cybersecurity Class
 
 All HTML files use:
 - Times New Roman font
@@ -88,3 +88,4 @@ Use your browser print options if you need printable course documents.
 
 All training content is for educational use only.  
 Security testing must be performed only on systems with explicit authorization.
+
